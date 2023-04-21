@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--第一部分-->
+<div th:insert="~{head::head}"></div>
+
+<!--第二部分-->
+<div style="display: flex">
+    <div th:insert="~{menu::menu}" style="width: 10%"></div>
+
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>角色管理页面 >> 角色修改页面</span>
+        </div>
+        <div class="supplierAdd">
+            <form id="roleForm" name="roleForm" method="post" th:action="@{roleForm}">
+                <input type="hidden" name="id" th:value="${sysRole.id}"/>
+                <div>
+                    <label for="code">用户编码：</label>
+                    <input type="text"  id="code"  th:value="${sysRole.code}" readonly="readonly">
+                </div>
+                <div>
+                    <label for="roleName">用户名称：</label>
+                    <input type="text" name="roleName" id="roleName"  th:value="${sysRole.roleName}">
+                    <font color="red"></font>
+                </div>
+
+                <div class="supplierAddBtn">
+                    <input type="submit" name="save" id="save" value="保存" />
+                    <input type="button" id="back" name="back" value="返回"/>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<!--第三部分-->
+<div th:insert="~{foot::foot}"></div>
+
+</body>
+</html>

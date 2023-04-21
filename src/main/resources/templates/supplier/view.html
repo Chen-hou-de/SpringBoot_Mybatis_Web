@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--第一部分-->
+<div th:insert="~{head::head}"></div>
+
+<!--第二部分-->
+<div style="display: flex">
+    <div th:insert="~{menu::menu}" style="width: 10%"></div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>供应商管理页面 >> 信息查看</span>
+        </div>
+        <div class="supplierView">
+            <p><strong>供应商编码：</strong><span></span></p>
+            <p><strong>供应商名称：</strong><span></span></p>
+            <p><strong>联系人：</strong><span></span></p>
+            <p><strong>联系电话：</strong><span></span></p>
+            <p><strong>传真：</strong><span></span></p>
+            <p><strong>描述：</strong><span></span></p>
+            <p><strong>企业营业执照：</strong><span>
+
+            </span></p>
+
+            <p><strong>组织机构代码证：</strong><span>
+
+            </span></p>
+
+            <div class="supplierAddBtn">
+                <input type="button" id="back" name="back" value="返回" >
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--第三部分-->
+<div th:insert="~{foot::foot}"></div>
+
+<script type="text/javascript" th:src="@{js/supplier/view.js}"></script>
+</body>
+</html>

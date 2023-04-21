@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.StorageRecordMapper">
+  <resultMap id="BaseResultMap" type="com.pojo.StorageRecord">
+    <!--@mbg.generated-->
+    <!--@Table t_storage_record-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sr_code" jdbcType="VARCHAR" property="srCode" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goods_desc" jdbcType="VARCHAR" property="goodsDesc" />
+    <result column="goods_unit" jdbcType="VARCHAR" property="goodsUnit" />
+    <result column="goods_count" jdbcType="DECIMAL" property="goodsCount" />
+    <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
+    <result column="pay_status" jdbcType="INTEGER" property="payStatus" />
+    <result column="created_user_id" jdbcType="BIGINT" property="createdUserId" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_user_id" jdbcType="BIGINT" property="updatedUserId" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="supplier_id" jdbcType="BIGINT" property="supplierId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, sr_code, goods_name, goods_desc, goods_unit, goods_count, total_amount, pay_status, 
+    created_user_id, created_time, updated_user_id, updated_time, supplier_id
+  </sql>
+</mapper>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.SysUserMapper">
+<!--  <resultMap id="BaseResultMap" type="com.pojo.SysUser">-->
+<!--    &lt;!&ndash;@mbg.generated&ndash;&gt;-->
+<!--    &lt;!&ndash;@Table t_sys_user&ndash;&gt;-->
+<!--    <id column="id" jdbcType="BIGINT" property="id" />-->
+<!--    <result column="account" jdbcType="VARCHAR" property="account" />-->
+<!--    <result column="real_name" jdbcType="VARCHAR" property="realName" />-->
+<!--    <result column="password" jdbcType="VARCHAR" property="password" />-->
+<!--    <result column="sex" jdbcType="INTEGER" property="sex" />-->
+<!--    <result column="birthday" jdbcType="DATE" property="birthday" />-->
+<!--    <result column="phone" jdbcType="VARCHAR" property="phone" />-->
+<!--    <result column="address" jdbcType="VARCHAR" property="address" />-->
+<!--    <result column="role_id" jdbcType="BIGINT" property="roleId" />-->
+<!--    <result column="created_user_id" jdbcType="BIGINT" property="createdUserId" />-->
+<!--    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />-->
+<!--    <result column="updated_user_id" jdbcType="BIGINT" property="updatedUserId" />-->
+<!--    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />-->
+<!--    <result column="deleted" jdbcType="INTEGER" property="deleted" />-->
+<!--  </resultMap>-->
+<!--  <sql id="Base_Column_List">-->
+<!--    &lt;!&ndash;@mbg.generated&ndash;&gt;-->
+<!--    id, account, real_name, `password`, sex, birthday, phone, address, role_id, created_user_id, -->
+<!--    created_time, updated_user_id, updated_time, deleted-->
+<!--  </sql>-->
+
+
+
+  <resultMap id="UserMap" type="com.pojo.SysUser">
+    <id column="id" property="id" />
+    <result column="account"  property="account" />
+    <result column="real_name" property="realName" />
+    <result column="password" property="password" />
+    <result column="sex" property="sex" />
+    <result column="birthday" property="birthday" />
+    <result column="phone" property="phone" />
+    <result column="address" property="address" />
+    <result column="created_user_id" property="createdUserId" />
+    <result column="created_time" property="createdTime" />
+    <result column="updated_user_id" property="updatedUserId" />
+    <result column="updated_time" property="updatedTime" />
+    <result column="deleted" property="deleted" />
+    <collection property="roleId" ofType="com.pojo.SysRole">
+      <id column="id" property="id" />
+      <result column="code"  property="code" />
+      <result column="role_name" property="roleName" />
+      <result column="created_user_id" property="createdUserId" />
+      <result column="created_time" property="createdTime" />
+      <result column="updated_user_id" property="updatedUserId" />
+      <result column="updated_time" property="updatedTime" />
+    </collection>
+  </resultMap>
+
+
+
+  <select id="Select_aaa" resultMap="UserMap" resultType="com.pojo.SysUser">
+    SELECT us.*,role.* FROM `t_sys_user` as us join t_sys_role  as role on role.id = us.role_id
+  </select>
+
+
+<!--模糊查询-->
+  <select id="Select_Like" resultMap="UserMap" resultType="com.pojo.SysUser">
+    SELECT us.*,role.* FROM `t_sys_user` as us join t_sys_role  as role on role.id = us.role_id
+    <where>
+      <if test="realName !=null and realName!=''"></if>
+      us.real_name like concat('%',#{realName},'%')
+
+      <if test="roleID !=null and realName!=''"></if>
+      and us.role_id =#{roleID}
+    </where>
+  </select>
+
+
+
+<!--  <select id="findByPage" resultMap="UserMap">-->
+<!--    SELECT us.*,role.* FROM `t_sys_user` as us join t_sys_role  as role on role.id = us.role_id-->
+<!--    <where>-->
+<!--      <if test="dto.userName !='' and dto.userName != null">-->
+<!--        and u.user_name = #{dto.userName,jdbcType=VARCHAR}-->
+<!--      </if>-->
+<!--      <if test="dto.sex != null">-->
+<!--        and u.sex = #{dto.sex,jdbcType=TINYINT}-->
+<!--      </if>-->
+<!--      <if test="dto.email !='' and dto.email != null">-->
+<!--        and u.email = #{dto.email,jdbcType=VARCHAR}-->
+<!--      </if>-->
+<!--      <if test="dto.phone != null and dto.phone!='' ">-->
+<!--        and u.phone = #{dto.phone,jdbcType=VARCHAR}-->
+<!--      </if>-->
+<!--      <if test="dto.hobby != null and dto.hobby!='' ">-->
+<!--        and ud.hobby = #{dto.hobby,jdbcType=VARCHAR}-->
+<!--      </if>-->
+<!--    </where>-->
+<!--  </select>-->
+
+
+  <select id="Select_ByID" resultMap="UserMap">
+    SELECT us.*,role.* FROM `t_sys_user` as us join t_sys_role  as role on role.id = us.role_id where us.id =#{ID}
+  </select>
+
+
+
+</mapper>

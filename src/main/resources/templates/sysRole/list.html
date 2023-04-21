@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--第一部分-->
+<div th:insert="~{head::head}"></div>
+
+<!--第二部分-->
+<div style="display: flex">
+    <div th:insert="~{menu::menu}" style="width: 10%"></div>
+
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>角色管理页面</span>
+        </div>
+        <div class="search">
+            <a th:href="@{sysRoleAdd}" >添加角色</a>
+        </div>
+        <table class="supplierTable" cellpadding="0" cellspacing="0">
+            <tr class="firstTr">
+                <th width="10%">角色编码</th>
+                <th width="20%">角色名称</th>
+                <th width="10%">创建时间</th>
+                <th width="30%">操作</th>
+            </tr>
+
+            <tr th:each="user:${sysRoleList}">
+                <td th:text="${user.code}"></td>
+                <td th:text="${user.roleName}"></td>
+                <td th:text="${#dates.format(user.createdTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td>
+                    <span><a th:href="@{'/RoleUpdate'(id=${user.id})}"><img th:src="@{images/xiugai.png}" alt="修改" title="修改"/></a></span>
+                    <span><a th:onclick="|del(${user.id})|"><img th:src="@{/images/schu.png}" alt="删除" title="删除"/></a></span>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+
+
+
+</div>
+
+<script>
+
+
+    function del(id){
+        var bool =confirm("确定删除吗");
+        if (bool===true){
+
+            $.post("../RoleDelete", "id="+id, function(data) {
+
+               if (data===true){
+
+                   alert("删除成功");
+
+               }else {
+
+                   alert("删除失败");
+               }
+
+            }, "json");
+        }
+    }
+
+
+
+
+</script>
+
+
+
+
+
+<!--第三部分-->
+<div th:insert="~{foot::foot}"></div>
+</body>
+</html>

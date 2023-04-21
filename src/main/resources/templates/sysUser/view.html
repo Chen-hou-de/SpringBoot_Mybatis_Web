@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--第一部分-->
+<div th:insert="~{head::head}"></div>
+
+<!--第二部分-->
+<div style="display: flex">
+    <div th:insert="~{menu::menu}" style="width: 10%"></div>
+    <div class="right">
+        <div class="location">
+            <strong>当前位置:</strong>
+            <span>用户管理页面 >> 用户查看详情页面</span>
+        </div>
+        <div class="supplierView">
+            <p><strong>用户编号：</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${UserView.get(0).id}">1001</span></p>
+            <p><strong>账号：</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${UserView.get(0).realName}">潭江</span></p>
+            <p><strong>性别：</strong>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>男
+				</span>
+            </p>
+            <p><strong>出生日期：</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${#dates.format(UserView.get(0).birthday,'yyyy-MM-dd')}">1995</span></p>
+            <p><strong>手机号码：</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${UserView.get(0).phone}">13715257464</span></p>
+            <p><strong>地址：</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${UserView.get(0).address}">长沙科泰</span></p>
+            <p><strong>角色：</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${UserView.get(0).roleId.roleName}">管理员</span></p>
+            <div class="supplierAddBtn">
+                <input type="button" id="back" name="back" onclick="ComBack()" value="返回" >
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--第三部分-->
+<div th:insert="~{foot::foot}"></div>
+
+<script>
+
+    function ComBack(){
+
+        alert("提交");
+        location.href="list.html";
+
+    }
+
+
+
+</script>
+
+
+</body>
+</html>

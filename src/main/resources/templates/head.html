@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/style.css}" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/public.css}" />
+    <script th:src="@{/js/jquery.js}"></script>
+</head>
+
+<body th:fragment="head">
+
+<header class="publicHeader">
+    <h1>724便利店管理系统</h1>
+    <div class="publicHeaderR">
+        <p><span style="color: #fff21b" th:text="${session.userSession.getRealName()}"> </span> , 欢迎光临！</p>
+        <a th:href="@{OutLogin}">登出</a>
+    </div>
+</header>
+<!--时间-->
+<section class="publicTime">
+    <span id="timeShow">2019年1月1日 11:11  星期一</span>
+    <a href="#">为了保证正常使用，请使用IE10.0以上版本！</a>
+</section>
+<!--主体内容-->
+<!--    <div class="left">-->
+<!--        <h2 class="leftH2"><span class="span1"></span>菜单 <span></span></h2>-->
+<!--        <nav>-->
+<!--            <ul class="list">-->
+<!--                <li><a th:href="@{UserAdd}" target="_blank">入库记录信息</a></li>-->
+<!--                <li><a th:href="@{UserList}" target="_blank">供货商信息</a></li>-->
+<!--                <li><a th:href="@{RoleList}" target="_blank">用户信息</a></li>-->
+<!--                <li><a th:href="@{RoleList}" target="_blank">角色管理</a></li>-->
+<!--                <li><a th:href="@{updatePassword}" target="_blank">修改密码</a></li>-->
+<!--                <li><a th:href="@{OutLogin}">退出系统</a></li>-->
+<!--            </ul>-->
+<!--        </nav>-->
+<!--    </div>-->
+
+<script>
+
+    var t = null;
+
+    function time() {
+        dt = new Date();
+        var y = dt.getFullYear();
+        var M = dt.getMonth() + 1;
+        var d = dt.getDate();
+        var h = dt.getHours();
+        var m = dt.getMinutes();
+        var s = dt.getSeconds();
+        M=checkTime(M);
+        d=checkTime(d);
+        h=checkTime(h);
+        m=checkTime(m);
+        s=checkTime(s);
+        document.getElementById("timeShow").innerHTML = "当前时间：" + y + "-" + M + "-" + d + " " + h + ":" + m + ":" + s;
+        t = setTimeout(time, 1000);
+    }
+
+    window.onload = function () {
+        time()
+    }
+
+    function checkTime(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+
+
+</script>
+
+</body>
+</html>

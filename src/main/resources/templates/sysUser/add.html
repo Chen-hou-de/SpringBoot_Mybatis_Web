@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Title</title>
+</head>
+<body>
+<!--第一部分-->
+<div th:insert="~{head::head}"></div>
+
+<!--第二部分-->
+<div style="display: flex">
+    <div th:insert="~{menu::menu}" style="width: 10%"></div>
+
+    <div class="right">
+        <div class="location">
+            <strong>当前位置:</strong>
+            <span>用户管理页面 >> 用户添加页面</span>
+        </div>
+        <div class="supplierAdd">
+            <form id="userForm" name="userForm" enctype="multipart/form-data" method="post" th:action="@{Chd}">
+                <!--div的class 为error是验证错误，ok是验证成功-->
+                <div>
+                    <label for="account">账号：</label>
+                    <input type="text" name="account" id="account" value="">
+                    <!-- 放置提示信息 -->
+                    <font color="red"></font>
+                </div>
+                <div>
+                    <label for="realName">真实姓名：</label>
+                    <input type="text" name="realName" id="realName" value="">
+                    <font color="red"></font>
+                </div>
+                <div>
+                    <label for="password">密码：</label>
+                    <input type="password" name="password" id="password" value="">
+                    <font color="red"></font>
+                </div>
+                <div>
+                    <label for="password2">确认密码：</label>
+                    <input type="password" name="password2" id="password2" value="">
+                    <font color="red"></font>
+                </div>
+                <div>
+                    <label >性别：</label>
+                    <select name="sex" id="sex">
+                        <option value="1" selected="selected">女</option>
+                        <option value="2">男</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="birthday">出生日期：</label>
+                    <input type="date" Class="Wdate" id="birthday" name="birthday">
+                    <font color="red"></font>
+                </div>
+                <div>
+                    <label for="phone">手机号码：</label>
+                    <input type="text" name="phone" id="phone" value="">
+                    <font color="red"></font>
+                </div>
+                <div>
+                    <label for="address">地址：</label>
+                    <input name="address" id="address"  value="">
+                </div>
+                <div>
+                    <label >角色：</label>
+                    <!-- 列出所有的角色分类 -->
+                    <select name="roleId" id="roleList">
+                        <option
+                                th:each="tsubject:${courses}"
+                                th:value="${tsubject.id}"
+                                th:text="${tsubject.roleName}"
+                        >
+                        </option>
+                    </select>
+                    <font color="red"></font>
+                </div>
+
+                <div class="supplierAddBtn">
+                    <input type="submit" name="add" id="add" value="保存" >
+                    <input type="button" id="back" name="back" value="返回" >
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--第三部分-->
+<div th:insert="~{foot::foot}"></div>
+
+
+</body>
+</html>

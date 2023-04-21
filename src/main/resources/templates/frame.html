@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<!--第一部分-->
+    <div th:insert="~{head::head}"></div>
+
+<!--第二部分-->
+    <div style="display: flex">
+        <div th:insert="~{menu::menu}" style="width: 10%"></div>
+        <div class="right">
+            <img class="wColck" th:src="@{/images/clock.jpg}" alt=""/>
+            <div class="wFont">
+                <h2 th:text="${session.userSession.getRealName()}"></h2>
+                <p>欢迎来到724便利店管理系统!</p>
+            </div>
+        </div>
+    </div>
+
+<!--第三部分-->
+    <div th:insert="~{foot::foot}"></div>
+
+</body>
+</html>

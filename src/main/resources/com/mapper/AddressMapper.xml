@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.AddressMapper">
+  <resultMap id="BaseResultMap" type="com.pojo.Address">
+    <!--@mbg.generated-->
+    <!--@Table t_address-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="contact" jdbcType="VARCHAR" property="contact" />
+    <result column="address_desc" jdbcType="VARCHAR" property="addressDesc" />
+    <result column="post_code" jdbcType="VARCHAR" property="postCode" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="created_user_id" jdbcType="BIGINT" property="createdUserId" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_user_id" jdbcType="BIGINT" property="updatedUserId" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, contact, address_desc, post_code, tel, created_user_id, created_time, updated_user_id, 
+    updated_time, user_id
+  </sql>
+</mapper>

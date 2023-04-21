@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        .text_chd{
+            font-size: 20px;
+        }
+
+        .text_aaa{
+            font-size: 20px;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+<!--第一部分-->
+<div th:insert="~{head::head}"></div>
+
+<!--第二部分-->
+<div style="display: flex">
+    <div th:insert="~{menu::menu}" style="width: 10%"></div>
+    <div class="right">
+        <div class="location">
+            <strong>当前位置:</strong>
+            <span>供货商管理页面</span>
+        </div>
+        <div class="search">
+            <form method="get" action="${pageContext.request.contextPath }/sys/supplier/list">
+                <span>供货商编码：</span>
+                <input name="querySupCode" type="text">
+
+                <span>供货商名称：</span>
+                <input name="querySupName" type="text">
+                <input type="hidden" name="pageIndex" value="1"/>
+                <input value="查 询" type="submit" id="searchbutton">
+                <a href="${pageContext.request.contextPath }/sys/supplier/toAdd">添加</a>
+            </form>
+        </div>
+        <!--供货商操作表格-->
+        <table class="supplierTable" cellpadding="0" cellspacing="0">
+            <tr class="firstTr">
+                <th width="10%">供货商编码</th>
+                <th width="20%">供货商名称</th>
+                <th width="10%">联系人</th>
+                <th width="10%">联系电话</th>
+                <th width="10%">传真</th>
+                <th width="10%">创建时间</th>
+                <th width="30%">操作</th>
+            </tr>
+
+            <tr class="gradeX" th:each="user,stats:${page.records}">
+                <td><span th:text="${user.supCode}"></span></td>
+                <td><span th:text="${user.supName}"></span></td>
+                <td><span th:text="${user.supContact}"></span></td>
+                <td><span th:text="${user.supPhone}"></span></td>
+                <td><span th:text="${user.supFax}"></span></td>
+                <td><span th:text="${user.supFax}"></span></td>
+                <td>
+                    <span><a><img th:src="@{/images/view.png}" alt="查看" title="查看"/></a></span>
+                    <span><a><img th:src="@{/images/upd.png}" alt="修改" title="修改"/></a></span>
+                    <span><a><img th:src="@{/images/del.png}" alt="删除" title="删除"/></a></span>
+                </td>
+            </tr>
+
+        </table>
+
+        <div th:align="center" class="text_chd">
+            当前第 [[${page.current}]] 页
+            总计 [[${page.pages}]] 页
+            共 [[${page.total}]] 条记录
+        </div>
+
+        <ul th:align="center">
+            <span class="text_aaa" th:if="${page.current>1}"><a th:href="@{/ShopList(pn=1)}">首页</a></span>
+            <span class="text_aaa" th:if="${page.current>1}"><a th:href="@{/ShopList(pn=${(page.current)-1})}">前一页</a></span>
+            <span class="text_aaa" th:if="${page.current==1}"><a>首页</a></span>
+            <span class="text_aaa" th:if="${page.current==1}"><a>前一页</a></span>
+            <span class="text_aaa" th:if="${page.current<page.pages}"><a th:href="@{/ShopList(pn=${(page.current)+1})}">下一页</a></span>
+            <span class="text_aaa" th:if="${page.current<page.pages}"><a th:href="@{/ShopList(pn=${page.pages})}">尾页</a></span>
+            <span class="text_aaa" th:if="${page.current==page.pages}"><a>下一页</a></span>
+            <span class="text_aaa" th:if="${page.current==page.pages}"><a>尾页</a></span>
+        </ul>
+
+
+
+    </div>
+
+    <!--点击删除按钮后弹出的页面-->
+    <div class="zhezhao"></div>
+    <div class="remove" id="removeProv">
+        <div class="removerChid">
+            <h2>提示</h2>
+            <div class="removeMain" >
+                <p>确定删除该供货商吗？</p>
+                <a href="#" id="yes">是</a>
+                <a href="#" id="no">否</a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<!--第三部分-->
+<div th:insert="~{foot::foot}"></div>
+
+<script type="text/javascript" th:src="@{/js/supplier/list.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        .text_chd{
+            font-size: 15px;
+        }
+
+        .text_aaa{
+            font-size: 20px;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+<!--第一部分-->
+<div th:insert="~{head::head}"></div>
+
+<!--第二部分-->
+<div style="display: flex">
+    <div th:insert="~{menu::menu}" style="width: 10%"></div>
+    <div class="right">
+        <div class="location">
+            <strong>当前位置:</strong>
+            <span>用户管理页面</span>
+        </div>
+        <div class="search">
+            <form method="get" th:action="@{search}">
+                <span>用户名：</span>
+                <input name="queryRealName" class="input-text"	type="text" placeholder="输入要搜索的">
+
+                <span>角色：</span>
+                <select name="queryRoleId">
+                    <option
+                            th:each="tsubject:${courses}"
+                            th:value="${tsubject.id}"
+                            th:text="${tsubject.roleName}"
+                    >
+                    </option>
+                </select>
+
+                <input	value="查 询" type="submit" id="searchbutton">
+                <a th:href="@{UserAdd}" >添加</a>
+            </form>
+        </div>
+        <!--用户-->
+        <table class="supplierTable" cellpadding="0" cellspacing="0">
+            <tr class="firstTr">
+                <th width="15%">账号</th>
+                <th width="15%">真实姓名</th>
+                <th width="10%">角色</th>
+                <th width="10%">性别</th>
+                <th width="10%">年龄</th>
+                <th width="10%">电话</th>
+                <th width="30%">操作</th>
+            </tr>
+
+            <tr  th:each="user,stats:${pageInfo.list}">
+                <td th:text="${user.account}">Trident</td>
+                <td th:text="${user.realName}">id</td>
+
+
+                <td th:text="${user.roleId.roleName}">
+                </td>
+
+                <td th:switch="${user.sex}">
+                    <span th:case="1">女</span>
+                    <span th:case="2">男</span>
+                </td>
+
+                <td th:text="${user.realName}"></td>
+                <td th:text="${user.phone}"></td>
+                <td>
+                    <span><a th:href="@{'/UserView'(ID=${user.id})}"><img th:src="@{/images/view.png}" alt="查看" title="查看"/></a></span>
+                    <span><a th:href="@{'/UserUpdate'(ID=${user.id})}"><img th:src="@{/images/upd.png}" alt="修改" title="修改"/></a></span>
+                    <span><a th:onclick="|del(${user.id})|"><img th:src="@{/images/del.png}" alt="删除" title="删除"/></a></span>
+                </td>
+            </tr>
+
+        </table>
+
+        <div th:align="center" class="text_chd">
+            总计 [[${pageInfo.pages}]] 页
+            共 [[${pageInfo.total}]] 条记录
+        </div>
+
+        <ul th:align="center">
+            <span><a class="text_aaa" th:href="@{/aaa(pn=1)}">首页</a></span>
+            <span><a class="text_aaa" th:href="@{/aaa(pn=${pageInfo.pageNum}-1)}">上一页</a></span>
+            <span><a class="text_aaa" th:href="@{/aaa(pn=${pageInfo.pageNum}+1)}">下一页</a></span>
+            <span><a class="text_aaa" th:href="@{/aaa(pn=${pageInfo.pages})}">尾页</a></span>
+        </ul>
+
+
+
+</div>
+</div>
+
+<!--第三部分-->
+<div th:insert="~{foot::foot}"></div>
+
+<script>
+
+    function del(id){
+        var bool =confirm("确定删除吗");
+        if (bool===true){
+
+            $.post("../UserDelete", "id="+id, function(data) {
+
+                if (data===true){
+
+                    alert("删除成功");
+
+                }else {
+
+                    alert("删除失败");
+                }
+
+            }, "json");
+        }
+    }
+
+
+</script>
+
+</body>
+</html>

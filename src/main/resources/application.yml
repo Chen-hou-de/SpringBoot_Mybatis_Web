@@ -1,0 +1,40 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cvs_db
+    username: root
+    password: root
+
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    map-underscore-to-camel-case: true
+  #    逻辑删除
+#  global-config:
+#    db-config:
+#      #      逻辑删除标示字段
+#      logic-delete-field: deleted
+#      #      表示字段deleted=1时则视为被删除
+#      logic-delete-value: 1
+#      logic-not-delete-value: 0
+
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+
+logging:
+  level:
+    com.mapper: debug
+
